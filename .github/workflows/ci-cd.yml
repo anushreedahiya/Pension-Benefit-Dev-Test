@@ -9,29 +9,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Build Next.js app with MongoDB URI from GitHub Secret
       - name: Build Next.js app
         run: npm run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
+      # Step 5: Build Docker image
       - name: Docker build
         run: |
           docker build \
             --build-arg MONGODB_URI="${{ secrets.MONGODB_URI }}" \
             -t nextjs-pbl-app:latest .
 
-      # Optional: Push to Docker Hub
+      # Optional: Push Docker image to Docker Hub
       # - name: Log in to Docker Hub
       #   uses: docker/login-action@v2
       #   with:
@@ -49,6 +54,7 @@ jobs:
       #     command: apply
       #     args: -f k8s/deployment.yaml -f k8s/service.yaml
 
+      # Step 6: Save build artifact
       - name: Save build artifact
         uses: actions/upload-artifact@v4
         with:

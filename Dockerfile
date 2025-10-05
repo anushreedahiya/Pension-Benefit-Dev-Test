@@ -1,20 +1,20 @@
 # Step 1: Build the Next.js app
 FROM node:18-alpine AS builder
 
+# Accept MongoDB URI as build argument
+ARG MONGODB_URI
+ENV MONGODB_URI=$MONGODB_URI
+
 WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy source code
+# Copy the rest of the app
 COPY . .
 
-# Accept the MongoDB URI as a build argument and set it as an environment variable
-ARG MONGODB_URI
-ENV MONGODB_URI=${MONGODB_URI}
-
-# Build the Next.js app
+# Build the app
 RUN npm run build
 
 # Step 2: Run production server
@@ -22,11 +22,15 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy build from the builder stage
+# Accept MongoDB URI as environment variable
+ARG MONGODB_URI
+ENV MONGODB_URI=$MONGODB_URI
+
+# Copy built app from builder stage
 COPY --from=builder /app ./
 
-# Expose the port
-EXPOSE 3000
+# Expose port
+EXPOSE 3001
 
-# Start the server
+# Start app
 CMD ["npm", "start"]
