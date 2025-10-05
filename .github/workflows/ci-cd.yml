@@ -23,10 +23,13 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          MONGODB_URI: "mongodb://localhost:27017/test"
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Docker build
-        run: docker build -t nextjs-pbl-app:latest .
+        run: |
+          docker build \
+            --build-arg MONGODB_URI="${{ secrets.MONGODB_URI }}" \
+            -t nextjs-pbl-app:latest .
 
       # Optional: Push to Docker Hub
       # - name: Log in to Docker Hub
