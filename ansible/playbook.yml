@@ -3,11 +3,19 @@
   become: yes
   tasks:
     - name: Update apt
-      apt: update_cache=yes
-
-    - name: Install Node.js and npm
       apt:
-        name: [nodejs, npm]
+        update_cache: yes
+
+    - name: Install Node.js 18.x
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+        apt-get install -y nodejs
+      args:
+        creates: /usr/bin/node
+
+    - name: Install npm
+      apt:
+        name: npm
         state: present
 
     - name: Install Docker
@@ -15,15 +23,29 @@
         name: docker.io
         state: present
 
+    # - name: Ensure Docker service is running
+    #   service:
+    #     name: docker
+    #     state: started
+    #     enabled: yes
+
+    - name: Create app user
+      user:
+        name: nextjs
+        create_home: yes
+
     - name: Create app directory
       file:
         path: /opt/nextjs-app
         state: directory
+        owner: nextjs
+        group: nextjs
+        mode: '0755'
 
     - name: Copy app files
       copy:
         src: ../
         dest: /opt/nextjs-app
-        owner: root
-        group: root
+        owner: nextjs
+        group: nextjs
         mode: '0755'
