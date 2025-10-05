@@ -27,14 +27,11 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       # Step 5: Build Docker image
       - name: Docker build
-        run: |
-          docker build \
-          --build-arg MONGODB_URI="${{ secrets.MONGODB_URI }}" \
-          -t nextjs-pbl-app:latest .
+        run: docker build -t nextjs-pbl-app:latest .
 
 
       # Optional: Push Docker image to Docker Hub
