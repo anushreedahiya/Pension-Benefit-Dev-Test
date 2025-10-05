@@ -1,0 +1,29 @@
+- name: Setup runtime environment
+  hosts: local
+  become: yes
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install Node.js and npm
+      apt:
+        name: [nodejs, npm]
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Create app directory
+      file:
+        path: /opt/nextjs-app
+        state: directory
+
+    - name: Copy app files
+      copy:
+        src: ../
+        dest: /opt/nextjs-app
+        owner: root
+        group: root
+        mode: '0755'

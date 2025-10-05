@@ -1,0 +1,73 @@
+{
+    "formTitle": "Pension Scheme Eligibility Form",
+    "sections": [
+      {
+        "title": "Personal Details",
+        "fields": [
+          { "label": "Full Name", "type": "text", "name": "fullName", "required": true },
+          { "label": "Date of Birth", "type": "date", "name": "dob", "required": true },
+          { "label": "Gender", "type": "select", "name": "gender", "required": true, "options": ["Male", "Female", "Other"] },
+          { "label": "Marital Status", "type": "select", "name": "maritalStatus", "options": ["Single", "Married", "Widowed", "Divorced", "Abandoned"] },
+          { "label": "Number of Dependents", "type": "number", "name": "dependents", "min": 0 }
+        ]
+      },
+      {
+        "title": "Residency & Citizenship",
+        "fields": [
+          { "label": "State / Union Territory", "type": "text", "name": "state", "required": true },
+          { "label": "Years of Residence in Current State", "type": "number", "name": "residenceYears", "min": 0 },
+          { "label": "Are you an Indian citizen?", "type": "select", "name": "citizenship", "required": true, "options": ["Yes", "No"] },
+          { "label": "Country", "type": "select", "name": "country", "required": true, "options": ["India", "USA", "UK", "Japan"] }
+        ]
+      },
+      {
+        "title": "Employment Details",
+        "fields": [
+          { "label": "Current Employment Status", "type": "select", "name": "employmentStatus", "options": ["Employed", "Self-Employed", "Unemployed", "Retired"] },
+          { "label": "Employment Sector", "type": "select", "name": "sector", "options": ["Organised", "Unorganised", "Government Service", "Agriculture", "Trade/Shopkeeping"] },
+          { "label": "If Government Service: Joined before 1 Jan 2004?", "type": "select", "name": "govtJoinBefore2004", "options": ["Yes", "No"] },
+          { "label": "If Farmer: Cultivable Land (in hectares)", "type": "number", "name": "landHectares", "step": 0.01, "min": 0 }
+        ]
+      },
+      {
+        "title": "Income & Financial Status",
+        "fields": [
+          { "label": "Monthly Family Income (₹)", "type": "number", "name": "monthlyIncome", "min": 0 },
+          { "label": "Are you an income tax payer?", "type": "select", "name": "taxPayer", "options": ["Yes", "No"] },
+          { "label": "Are you part of a BPL household?", "type": "select", "name": "bplStatus", "options": ["Yes", "No"] },
+          { "label": "Do you have Aadhaar Card?", "type": "select", "name": "aadhaar", "options": ["Yes", "No"] },
+          { "label": "Do you have a Bank Account?", "type": "select", "name": "bankAccount", "options": ["Yes", "No"] }
+        ]
+      },
+      {
+        "title": "Special Categories",
+        "fields": [
+          { "label": "Do you have a disability?", "type": "select", "name": "disability", "options": ["Yes", "No"] },
+          { "label": "If Yes, Percentage Disability", "type": "number", "name": "disabilityPercent", "min": 0, "max": 100 },
+          { "label": "Are you a widow?", "type": "select", "name": "widow", "options": ["Yes", "No"] },
+          { "label": "Are you destitute / without family support?", "type": "select", "name": "destitute", "options": ["Yes", "No"] },
+          { "label": "Do you belong to a Scheduled Caste (SC) or Scheduled Tribe (ST)?", "type": "select", "name": "casteCategory", "options": ["SC", "ST", "None"] },
+          { "label": "Are you a traditional worker (weaver, fisherman, etc.)?", "type": "select", "name": "traditionalWorker", "options": ["Yes", "No"] }
+        ]
+      },
+      {
+        "title": "Pension Preferences",
+        "fields": [
+          { "label": "Payout Type Preference", "type": "select", "name": "payoutType", "options": ["Monthly Pension", "Lump Sum", "Both"] },
+          { "label": "Investment Preference", "type": "select", "name": "investmentPreference", "options": ["Government-guaranteed pension", "Market-linked returns", "No preference"] },
+          { "label": "Willing to contribute monthly towards pension?", "type": "select", "name": "monthlyContributionWilling", "options": ["Yes", "No"] },
+          { "label": "If Yes, Affordable Monthly Contribution (₹)", "type": "number", "name": "affordableContribution", "min": 0 },
+          { "label": "Family Pension Requirement (for spouse after death)", "type": "select", "name": "familyPension", "options": ["Yes", "No"] }
+        ]
+      },
+      {
+        "title": "Documentation",
+        "fields": [
+          { "label": "Land Ownership Documents (if farmer)", "type": "select", "name": "landDocs", "options": ["Yes", "No"] },
+          { "label": "Disability Certificate (if applicable)", "type": "select", "name": "disabilityCert", "options": ["Yes", "No"] },
+          { "label": "State Residence Proof", "type": "select", "name": "residenceProof", "options": ["Yes", "No"] }
+        ]
+      }
+    ]
+  }
+  
