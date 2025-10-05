@@ -20,11 +20,11 @@ RUN npm run build
 # Step 2: Run production server
 FROM node:18-alpine
 
-WORKDIR /app
-
 # Accept MongoDB URI as environment variable
 ARG MONGODB_URI
 ENV MONGODB_URI=$MONGODB_URI
+
+WORKDIR /app
 
 # Copy built app from builder stage
 COPY --from=builder /app ./
